@@ -18,7 +18,7 @@
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
                     <div class="breadcrumb-item"><a href="#">Products</a></div>
-                    <div class="breadcrumb-item">All Users</div>
+                    <div class="breadcrumb-item">All Products</div>
                 </div>
             </div>
             <div class="section-body">
@@ -37,7 +37,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>All Posts</h4>
+                                <h4>All Products</h4>
                             </div>
                             <div class="card-body">
                                 <div class="float-left">
