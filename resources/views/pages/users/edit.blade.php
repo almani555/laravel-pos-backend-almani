@@ -96,9 +96,9 @@
                                         <span class="selectgroup-button">Admin</span>
                                     </label>
                                     <label class="selectgroup-item">
-                                        <input type="radio" name="roles" value="staff" class="selectgroup-input"
-                                            @if ($user->roles == 'staff') checked @endif>
-                                        <span class="selectgroup-button">Staff</span>
+                                        <input type="radio" name="roles" value="staf" class="selectgroup-input"
+                                            @if ($user->roles == 'staf') checked @endif>
+                                        <span class="selectgroup-button">Staf</span>
                                     </label>
                                     <label class="selectgroup-item">
                                         <input type="radio" name="roles" value="user" class="selectgroup-input"
