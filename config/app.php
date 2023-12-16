@@ -161,6 +161,11 @@ return [
          */
 
         /*
+         * FortifyServiceProvider
+         */
+        App\Providers\FortifyServiceProvider::class,
+
+        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
