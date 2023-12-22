@@ -25,8 +25,18 @@ class ProductController extends Controller
         return view('pages.products.create');
     }
     public function store(StoreProductRequest $request){
-        $data = $request->all();
-        \App\Models\Product::create($data);
+        $filename = time() . '.' . $request->image->extension();
+        $request->image->storeAs('public/products', $filename);
+        //$data = $request->all();
+
+        $product = new \App\Models\Product;
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = (int) $request->price;
+        $product->stock = (int) $request->stock;
+        $product->category = $request->category;
+        $product->image = $filename;
+        $product->save();
         return redirect()->route('product.index')->with('success', 'Product successfully created');
     }
 
