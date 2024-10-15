@@ -1,52 +1,49 @@
-@extends('layouts.app')
+@extends('layouts.materialapp')
 
 @section('title', 'Orders')
 
 @push('style')
-    <!-- CSS Libraries -->
-    <link rel="stylesheet" href="{{ asset('library/selectric/public/selectric.css') }}">
+    <!-- Waves Effect Css -->
+    <link href="{{ asset('plugins/node-waves/waves.css') }}" rel="stylesheet" />
 @endpush
 
 @section('main')
-    <div class="main-content">
-        <section class="section">
-            <div class="section-header">
-                <h1>Orders</h1>
-                <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Orders</a></div>
-                    <div class="breadcrumb-item">All Orders</div>
+    <section class="content">
+        <div class="container-fluid">
+            <section class="section">
+                <div class="section-header">
+
+                    <ol class="breadcrumb breadcrumb-bg-teal">
+                        <li><a href="{{ route('home.index') }}"><i class="material-icons">dashboard</i> Dashboard</a></li>
+                        <li><a href="javascript:void(0);"><i class="material-icons">receipt</i> Orders</a></li>
+                        <li class="active">All Orders</li>
+                    </ol>
                 </div>
-            </div>
-            <div class="section-body">
-                <div class="row">
-                    <div class="col-12">
-                        @include('layouts.alert')
+                <div class="section-body">
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @include('layouts.alert')
+                        </div>
                     </div>
-                </div>
-                <h2 class="section-title">Orders</h2>
-
-
-                <div class="row mt-4">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>All Orders</h4>
-                            </div>
-                            <div class="card-body">
-
-                                <div class="clearfix mb-3"></div>
-
-                                <div class="table-responsive">
-                                    <table class="table-striped table">
-                                        <tr>
-
-                                            <th>Transaction Time</th>
+                    <h2 class="section-title">Orders</h2>
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>All Orders </h2>
+                                </div>
+                                <div class="body table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Transaction Time</th>
                                             <th>Total Price</th>
                                             <th>Total Item</th>
                                             <th>Kasir</th>
-                                        </tr>
-                                        @foreach ($orders as $order)
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($orders as $order)
                                             <tr>
 
                                                 <td><a href="{{ route('order.show', $order->id) }}">{{ $order->transaction_time }}</a>
@@ -64,24 +61,41 @@
                                             </tr>
                                         @endforeach
 
-
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td>{{ $orders->withQueryString()->links() }}</td>
+                                            </tr>
+                                        </tfoot>
                                     </table>
-                                </div>
-                                <div class="float-right">
-                                    {{ $orders->withQueryString()->links() }}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-    </div>
+            </section>
+        </div>
+    </section>
 @endsection
 
 @push('scripts')
-    <!-- JS Libraies -->
-    <script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>
+    <!-- Select Plugin Js -->
+    <script src="{{ asset('plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="{{ asset('plugins/jquery-slimscroll/jquery.slimscroll.js') }}"></script>
+
+    <!-- Autosize Plugin Js -->
+    <script src="{{ asset('plugins/autosize/autosize.js') }}"></script>
+
+    <!-- Moment Plugin Js -->
+    <script src="{{ asset('plugins/momentjs/moment.js') }}"></script>
+
+    <!-- Bootstrap Material Datetime Picker Plugin Js -->
+    <script src="{{ asset('plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}">
+    </script>
+
+    <script src="{{ asset('js/material/pages/forms/basic-form-elements.js') }}"></script>
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('js/page/features-posts.js') }}"></script>

@@ -1,10 +1,6 @@
 @if ($message = Session::get('success'))
-    <div class="alert alert-success alert-dismissible show fade">
-        <div class="alert-body">
-            <button class="close" data-dismiss="alert">
-                <span>×</span>
-            </button>
-            <p>{{ $message }}</p>
-        </div>
+    <div class="alert bg-green alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <p>{{ $message }}</p>
     </div>
 @endif

@@ -1,134 +1,149 @@
-@extends('layouts.app')
+@extends('layouts.materialapp')
 
 @section('title', 'Create Product')
 
 @push('style')
     <!-- CSS Libraries -->
-    <link rel="stylesheet" href="{{ asset('library/bootstrap-daterangepicker/daterangepicker.css') }}">
-    <link rel="stylesheet" href="{{ asset('library/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('library/select2/dist/css/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('library/selectric/public/selectric.css') }}">
-    <link rel="stylesheet" href="{{ asset('library/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('library/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('plugins/node-waves/waves.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/dropzone/dropzone.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.css') }}">
 @endpush
 
 @section('main')
-    <div class="main-content">
-        <section class="section">
-            <div class="section-header">
-                <h1>Create Product</h1>
-                <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Forms</a></div>
-                    <div class="breadcrumb-item">Products</div>
+    <section class="content">
+        <div class="container-fluid">
+            <section class="section">
+                <div class="section-header">
+                    <ol class="breadcrumb breadcrumb-bg-teal">
+                        <li class="active"><a href="{{ route('home.index') }}"><i class="material-icons">dashboard</i>
+                                Dashboard</a></li>
+                        <li><a href="javascript:void(0);"><i class="material-icons">subtitles</i> Forms</a></li>
+                        <li>Products</li>
+                    </ol>
                 </div>
-            </div>
-
-            <div class="section-body">
-                <h2 class="section-title">Users</h2>
-
-
-
-                <div class="card">
-                    <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="card-header">
-                            <h4>Input Text</h4>
+                <div class="section-body">
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="header">
+                                        <h2>Create Product</h2>
+                                    </div>
+                                    <div class="card">
+                                        <div class="body row">
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="material-icons">local_mall</i>
+                                                    </span>
+                                                    <div class="form-line">
+                                                        <input type="text"
+                                                            class="form-control @error('name') is-invalid @enderror"
+                                                            name="name" placeholder="Product Name">
+                                                        @error('name')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="material-icons">description</i>
+                                                    </span>
+                                                    <div class="form-line">
+                                                        <input type="text"
+                                                            class="form-control @error('description') is-invalid @enderror"
+                                                            name="description" placeholder="Description">
+                                                        @error('description')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="material-icons">monetization_on</i>
+                                                    </span>
+                                                    <div class="form-line">
+                                                        <input type="number"
+                                                            class="form-control @error('price')
+                                                        is-invalid
+                                                    @enderror"
+                                                            name="price" placeholder="Price">
+                                                        @error('price')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="material-icons">dns</i>
+                                                    </span>
+                                                    <div class="form-line">
+                                                        <input type="number"
+                                                            class="form-control @error('stock')
+                                                        is-invalid
+                                                    @enderror"
+                                                            name="stock" placeholder="Stock">
+                                                        @error('stock')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 ">
+                                                <div class="card" style="padding: 10px;">
+                                                    <div class="body">
+                                                        <input onchange="showImage(this)" type="file"
+                                                            class="form-control @error('image') is-invalid @enderror"
+                                                            name="image">
+                                                    </div>
+                                                </div>
+                                                <div class="input-group">
+                                                    <label class="selectgroup-item">
+                                                        <input id="radio1" type="radio" name="category" value="food"
+                                                            checked="">
+                                                        <label for="radio1">Food</label>
+                                                    </label>
+                                                    <label class="selectgroup-item">
+                                                        <input id="radio2" type="radio" name="category" value="drink">
+                                                        <label for="radio2">Drink</label>
+                                                    </label>
+                                                    <label class="selectgroup-item">
+                                                        <input id="radio3" type="radio" name="category" value="snack">
+                                                        <label for="radio3">Snack</label>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12"><button class="btn btn-primary">Submit</button></div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label>Name</label>
-                                <input type="text"
-                                    class="form-control @error('name')
-                                is-invalid
-                            @enderror"
-                                    name="name">
-                                @error('name')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Description</label>
-                                <input type="text"
-                                    class="form-control @error('description')
-                                is-invalid
-                            @enderror"
-                                    name="description">
-                                @error('description')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Price</label>
-                                <input type="number"
-                                    class="form-control @error('price')
-                                is-invalid
-                            @enderror"
-                                    name="price">
-                                @error('price')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Stock</label>
-                                <input type="number"
-                                    class="form-control @error('stock')
-                                is-invalid
-                            @enderror"
-                                    name="stock">
-                                @error('stock')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Category</label>
-                                <div class="selectgroup w-100">
-                                    <label class="selectgroup-item">
-                                        <input type="radio" name="category" value="food" class="selectgroup-input"
-                                            checked="">
-                                        <span class="selectgroup-button">Food</span>
-                                    </label>
-                                    <label class="selectgroup-item">
-                                        <input type="radio" name="category" value="drink" class="selectgroup-input">
-                                        <span class="selectgroup-button">Drink</span>
-                                    </label>
-                                    <label class="selectgroup-item">
-                                        <input type="radio" name="category" value="snack" class="selectgroup-input">
-                                        <span class="selectgroup-button">Snack</span>
-                                    </label>
-
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Photo Product</label>
-                                <div class="col-sm-9">
-                                    <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
-                                </div>
-                                @error('name')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="card-footer text-right">
-                            <button class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
-
-            </div>
-        </section>
-    </div>
+            </section>
+        </div>
+    </section>
 @endsection
 
 @push('scripts')
+    <!-- Select Plugin Js -->
+    <script src="{{ asset('plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="{{ asset('plugins/jquery-slimscroll/jquery.slimscroll.js') }}"></script>
+
+
+    <!-- Input Mask Plugin Js -->
+    <script src="{{ asset('plugins/jquery-inputmask/jquery.inputmask.bundle.js') }}"></script>
 @endpush

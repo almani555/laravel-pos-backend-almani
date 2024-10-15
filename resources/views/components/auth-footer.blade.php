@@ -1,3 +1,3 @@
-  <div class="simple-footer">
-      Copyright &copy; FIC Batch 11
+  <div class="logo">
+      <small>Copyright &copy; MyPOS - Point of Sales</small>
   </div>

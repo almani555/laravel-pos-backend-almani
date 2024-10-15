@@ -8,55 +8,55 @@
 @endpush
 
 @section('main')
-    <div class="card card-primary">
-        <div class="card-header">
-            <h4>Login</h4>
-        </div>
-
-        <div class="card-body">
-            <form method="POST" action="{{ route('login') }}" class="needs-validation" novalidate="">
+    <div class="card">
+        <div class="body">
+            <form id="sign_in" method="POST" action="{{ route('login') }}" class="needs-validation" novalidate="">
                 @csrf
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input id="email" type="email"
-                        class="form-control @error('email')
+                <div class="msg">Sign in to start your session</div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">email</i>
+                    </span>
+                    <div class="form-line">
+                        <input id="email" type="email" class="form-control @error('email')
                         is-invalid
                     @enderror"
-                        name="email" tabindex="1" autofocus>
+                        name="email" placeholder="Email" tabindex="1" autofocus>
+                    </div>
                     @error('email')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">lock</i>
+                    </span>
+                    <div class="form-line">
+                        <input id="password" type="password" class="form-control @error('password') is-invalid
 
-                <div class="form-group">
-                    <div class="d-block">
-                        <label for="password" class="control-label">Password</label>
+                        @enderror"
+                            name="password" placeholder="Password" tabindex="2">
                     </div>
-                    <input id="password" type="password"
-                        class="form-control @error('password') is-invalid
-
-                    @enderror"
-                        name="password" tabindex="2">
                     @error('password')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
-
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                        Login
-                    </button>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button class="btn btn-block bg-pink waves-effect" type="submit" tabindex="3">SIGN IN</button>
+                    </div>
+                </div>
+                <div class="row m-t-15 m-b--20">
+                    <div class="col-xs-12 text-muted mt-5 text-center">
+                        Don't have an account? <a href="{{ route('register') }}">Register Now!</a>
+                    </div>
                 </div>
             </form>
-
         </div>
-    </div>
-    <div class="text-muted mt-5 text-center">
-        Don't have an account? <a href="{{ route('register') }}">Create One</a>
     </div>
 @endsection
 

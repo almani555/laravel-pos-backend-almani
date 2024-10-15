@@ -1,141 +1,146 @@
-@extends('layouts.app')
+@extends('layouts.materialapp')
 
 @section('title', 'Products')
 
 @push('style')
-    <!-- CSS Libraries -->
-    <link rel="stylesheet" href="{{ asset('library/selectric/public/selectric.css') }}">
+    <!-- Waves Effect Css -->
+    <link href="{{ asset('plugins/node-waves/waves.css') }}" rel="stylesheet" />
 @endpush
 
 @section('main')
-    <div class="main-content">
-        <section class="section">
-            <div class="section-header">
-                <h1>Products</h1>
-                <div class="section-header-button">
-                    <a href="{{ route('product.create') }}" class="btn btn-primary">Add New</a>
+    <section class="content">
+        <div class="container-fluid">
+            <section class="section">
+                <div class="section-header">
+
+                    <ol class="breadcrumb breadcrumb-bg-teal">
+                        <li><a href="{{ route('home.index') }}"><i class="material-icons">dashboard</i> Dashboard</a></li>
+                        <li><a href="javascript:void(0);"><i class="material-icons">local_mall</i> Products</a></li>
+                        <li class="active">All Products</li>
+                    </ol>
                 </div>
-                <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Products</a></div>
-                    <div class="breadcrumb-item">All Products</div>
-                </div>
-            </div>
-            <div class="section-body">
-                <div class="row">
-                    <div class="col-12">
-                        @include('layouts.alert')
+                <div class="section-body">
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @include('layouts.alert')
+                        </div>
                     </div>
-                </div>
-                <h2 class="section-title">Products</h2>
-                <p class="section-lead">
-                    You can manage all Products, such as editing, deleting and more.
-                </p>
-
-
-                <div class="row mt-4">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>All Products</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="float-left">
-                                    <select class="form-control selectric">
-                                        <option>Action For Selected</option>
-                                        <option>Move to Draft</option>
-                                        <option>Move to Pending</option>
-                                        <option>Delete Pemanently</option>
-                                    </select>
-                                </div>
-                                <div class="float-right">
-                                    <form method="GET" action="{{ route('product.index') }}">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Search" name="name">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                    <h2 class="section-title">Products</h2>
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>All Products <small>You can manage all Products, such as editing, deleting and
+                                            more. Click + on top right corner to add.</small></h2>
+                                    <div class="header-dropdown m-r--5">
+                                        <a href="{{ route('product.create') }}"><i class="material-icons">add_box</i></a>
+                                    </div>
+                                    <form method="GET" action="{{ route('product.index') }}" style="margin-top: 10px">
+                                        <div class="input-group input-group">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" placeholder="Search"
+                                                    name="name">
                                             </div>
+                                            <span class="input-group-addon">
+                                                <button class="btn btn-sm btn-default"><i
+                                                        class="material-icons">search</i></button>
+                                            </span>
                                         </div>
                                     </form>
                                 </div>
-
-                                <div class="clearfix mb-3"></div>
-
-                                <div class="table-responsive">
-                                    <table class="table-striped table">
-                                        <tr>
-
-                                            <th>Name</th>
-                                            <th>Category</th>
-                                            <th>Price</th>
-                                            <th>Photo</th>
-                                            <th>Stock</th>
-                                            <th>Created At</th>
-                                            <th>Action</th>
-                                        </tr>
-                                        @foreach ($products as $product)
+                                <div class="body table-responsive">
+                                    <table class="table">
+                                        <thead>
                                             <tr>
-
-                                                <td>{{ $product->name }}
-                                                </td>
-                                                <td>
-                                                    {{ $product->category }}
-                                                </td>
-                                                <td>
-                                                    {{ $product->price }}
-                                                </td>
-                                                <td>
-                                                    @if ($product->image)
-                                                        <img src="{{ asset('storage/products/'.$product->image) }}" alt="" width="100px" class="img-thumbnail">
-                                                    @else
-                                                        <span class="badge badge-danger">No Image</span>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    {{ $product->stock }}
-                                                </td>
-
-                                                <td>{{ $product->created_at }}</td>
-                                                <td>
-                                                    <div class="d-flex justify-content-center">
-                                                        <a href='{{ route('product.edit', $product->id) }}'
-                                                            class="btn btn-sm btn-info btn-icon">
-                                                            <i class="fas fa-edit"></i>
-                                                            Edit
-                                                        </a>
-
-                                                        <form action="{{ route('product.destroy', $product->id) }}" method="POST"
-                                                            class="ml-2">
-                                                            <input type="hidden" name="_method" value="DELETE" />
-                                                            <input type="hidden" name="_token"
-                                                                value="{{ csrf_token() }}" />
-                                                            <button class="btn btn-sm btn-danger btn-icon confirm-delete">
-                                                                <i class="fas fa-times"></i> Delete
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </td>
+                                                <th>Name</th>
+                                                <th>Category</th>
+                                                <th>Price</th>
+                                                <th>Photo</th>
+                                                <th>Stock</th>
+                                                <th>Created At</th>
+                                                <th>Action</th>
                                             </tr>
-                                        @endforeach
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($products as $product)
+                                                <tr>
 
+                                                    <td>{{ $product->name }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $product->category }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $product->price }}
+                                                    </td>
+                                                    <td>
+                                                        @if ($product->image)
+                                                            <img src="{{ asset('storage/products/' . $product->image) }}"
+                                                                alt="" width="100px" class="img-thumbnail">
+                                                        @else
+                                                            <span class="badge badge-danger">No Image</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        {{ $product->stock }}
+                                                    </td>
 
+                                                    <td>{{ $product->created_at }}</td>
+                                                    <td>
+                                                        <div class="d-flex justify-content-center">
+                                                            <a href='{{ route('product.edit', $product->id) }}'>
+                                                                <i class="material-icons">edit</i>
+                                                            </a>
+                                                            <a href="#"
+                                                                onclick="event.preventDefault(); document.getElementById('remove-{{ $product->id }}').submit()"><i
+                                                                    class="material-icons">delete</i></a>
+                                                            <form id="remove-{{ $product->id }}"
+                                                                action="{{ route('product.destroy', $product->id) }}"
+                                                                method="POST" class="ml-2">
+                                                                <input type="hidden" name="_method" value="DELETE" />
+                                                                <input type="hidden" name="_token"
+                                                                    value="{{ csrf_token() }}" />
+                                                            </form>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td>{{ $products->withQueryString()->links() }}</td>
+                                            </tr>
+                                        </tfoot>
                                     </table>
-                                </div>
-                                <div class="float-right">
-                                    {{ $products->withQueryString()->links() }}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-    </div>
+            </section>
+        </div>
+    </section>
 @endsection
 
 @push('scripts')
-    <!-- JS Libraies -->
-    <script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>
+    <!-- Select Plugin Js -->
+    <script src="{{ asset('plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="{{ asset('plugins/jquery-slimscroll/jquery.slimscroll.js') }}"></script>
+
+    <!-- Autosize Plugin Js -->
+    <script src="{{ asset('plugins/autosize/autosize.js') }}"></script>
+
+    <!-- Moment Plugin Js -->
+    <script src="{{ asset('plugins/momentjs/moment.js') }}"></script>
+
+    <!-- Bootstrap Material Datetime Picker Plugin Js -->
+    <script src="{{ asset('plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}">
+    </script>
+
+    <script src="{{ asset('js/material/pages/forms/basic-form-elements.js') }}"></script>
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('js/page/features-posts.js') }}"></script>

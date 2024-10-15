@@ -1,85 +1,100 @@
-@extends('layouts.app')
+@extends('layouts.materialapp')
 
 @section('title', 'Order Detail')
 
 @push('style')
-    <!-- CSS Libraries -->
-    <link rel="stylesheet" href="{{ asset('library/selectric/public/selectric.css') }}">
+    <!-- Waves Effect Css -->
+    <link href="{{ asset('plugins/node-waves/waves.css') }}" rel="stylesheet" />
 @endpush
 
 @section('main')
-    <div class="main-content">
-        <section class="section">
-            <div class="section-header">
-                <h1>Order Detail</h1>
-                <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Orders</a></div>
-                    <div class="breadcrumb-item">Order Detail</div>
+    <section class="content">
+        <div class="container-fluid">
+            <section class="section">
+                <div class="section-header">
+
+                    <ol class="breadcrumb breadcrumb-bg-teal">
+                        <li><a href="{{ route('home.index') }}"><i class="material-icons">dashboard</i> Dashboard</a></li>
+                        <li><a href="javascript:void(0);"><i class="material-icons">receipt</i> Orders</a></li>
+                        <li class="active">Order Detail</li>
+                    </ol>
                 </div>
-            </div>
-            <div class="section-body">
-                <div class="row">
-                    <div class="col-12">
-                        @include('layouts.alert')
+                <div class="section-body">
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @include('layouts.alert')
+                        </div>
                     </div>
-                </div>
-                <h2 class="section-title">Order Detail</h2>
-                <p class="section-lead">
+                    <h2 class="section-title">Orders</h2>
+                    <p class="section-lead">
                     <div>Total Price {{ $order->total_price }}</div>
                     <div>Transaction Time {{ $order->transaction_time }}</div>
                     <div>Total Item {{ $order->total_item }}</div>
-                </p>
-
-
-                <div class="row mt-4">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>All Items</h4>
-                            </div>
-                            <div class="card-body">
-
-                                <div class="clearfix mb-3"></div>
-
-                                <div class="table-responsive">
-                                    <table class="table-striped table">
-                                        <tr>
-                                            <th>Product Name</th>
-                                            <th>Price</th>
-                                            <th>Quantity</th>
-                                            <th>Total Price</th>
-                                        </tr>
-                                        @foreach ($orderItems as $item)
+                    </p>
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>All Items </h2>
+                                </div>
+                                <div class="body table-responsive">
+                                    <table class="table">
+                                        <thead>
                                             <tr>
-
-                                                <td>{{ $item->product->name }}
-                                                </td>
-                                                <td>
-                                                    {{ $item->product->price }}
-                                                </td>
-                                                <td>
-                                                    {{ $item->quantity }}
-                                                </td>
-                                                <td>
-                                                    {{ $item->total_price }}
-                                                </td>
+                                                <th>Product Name</th>
+                                                <th>Price</th>
+                                                <th>Quantity</th>
+                                                <th>Total Price</th>
                                             </tr>
-                                        @endforeach
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($orderItems as $item)
+                                                <tr>
+
+                                                    <td>{{ $item->product->name }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $item->product->price }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $item->quantity }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $item->total_price }}
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-    </div>
+            </section>
+        </div>
+    </section>
 @endsection
 
 @push('scripts')
-    <!-- JS Libraies -->
-    <script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>
+    <!-- Select Plugin Js -->
+    <script src="{{ asset('plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="{{ asset('plugins/jquery-slimscroll/jquery.slimscroll.js') }}"></script>
+
+    <!-- Autosize Plugin Js -->
+    <script src="{{ asset('plugins/autosize/autosize.js') }}"></script>
+
+    <!-- Moment Plugin Js -->
+    <script src="{{ asset('plugins/momentjs/moment.js') }}"></script>
+
+    <!-- Bootstrap Material Datetime Picker Plugin Js -->
+    <script src="{{ asset('plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}">
+    </script>
+
+    <script src="{{ asset('js/material/pages/forms/basic-form-elements.js') }}"></script>
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('js/page/features-posts.js') }}"></script>

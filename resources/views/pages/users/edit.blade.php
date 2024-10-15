@@ -1,131 +1,141 @@
-@extends('layouts.app')
+@extends('layouts.materialapp')
 
 @section('title', 'Edit User')
 
 @push('style')
     <!-- CSS Libraries -->
-    <link rel="stylesheet" href="{{ asset('library/bootstrap-daterangepicker/daterangepicker.css') }}">
-    <link rel="stylesheet" href="{{ asset('library/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('library/select2/dist/css/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('library/selectric/public/selectric.css') }}">
-    <link rel="stylesheet" href="{{ asset('library/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('library/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('plugins/node-waves/waves.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/dropzone/dropzone.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.css') }}">
 @endpush
 
 @section('main')
-    <div class="main-content">
-        <section class="section">
-            <div class="section-header">
-                <h1>Edit User</h1>
-                <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Forms</a></div>
-                    <div class="breadcrumb-item">Users</div>
+    <section class="content">
+        <div class="container-fluid">
+            <section class="section">
+                <div class="section-header">
+                    <ol class="breadcrumb breadcrumb-bg-teal">
+                        <li><a href="{{ route('home.index') }}"><i class="material-icons">dashboard</i> Dashboard</a></li>
+                        <li><a href="javascript:void(0);"><i class="material-icons">subtitles</i> Forms</a></li>
+                        <li class="active"> Users</li>
+                    </ol>
                 </div>
-            </div>
+                <div class="section-body">
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
 
-            <div class="section-body">
-                <h2 class="section-title">Users</h2>
-
-
-
-                <div class="card">
-                    <form action="{{ route('user.update', $user) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <div class="card-header">
-                            <h4>Input Text</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label>Name</label>
-                                <input type="text"
-                                    class="form-control @error('name')
-                                is-invalid
-                            @enderror"
-                                    name="name" value="{{ $user->name }}">
-                                @error('name')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
+                                <form action="{{ route('user.update', $user) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="header">
+                                        <h2>Edit Users</h2>
                                     </div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="email"
-                                    class="form-control @error('email')
-                                is-invalid
-                            @enderror"
-                                    name="email" value="{{ $user->email }}">
-                                @error('email')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="fas fa-lock"></i>
+                                    <div class="card">
+                                        <div class="body row">
+                                            <div class="col-md-12">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="material-icons">account_circle</i>
+                                                    </span>
+                                                    <div class="form-line">
+                                                        <input type="text"
+                                                            class="form-control @error('name') is-invalid @enderror"
+                                                            name="name" placeholder="Name" value="{{ $user->name }}">
+                                                        @error('name')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="material-icons">email</i>
+                                                    </span>
+                                                    <div class="form-line">
+                                                        <input type="email"
+                                                            class="form-control @error('email') is-invalid @enderror"
+                                                            name="email" placeholder="Email" value="{{ $user->email }}">
+                                                        @error('email')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="material-icons">lock</i>
+                                                    </span>
+                                                    <div class="form-line">
+                                                        <input type="password"
+                                                            class="form-control @error('password') is-invalid @enderror"
+                                                            name="password" placeholder="Password">
+                                                        @error('password')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="material-icons">phone</i>
+                                                    </span>
+                                                    <div class="form-line">
+                                                        <input type="number"
+                                                            class="form-control @error('phone')
+                                                        is-invalid
+                                                    @enderror"
+                                                            name="phone" placeholder="Phone" value="{{ $user->phone }}">
+                                                        @error('phone')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="input-group">
+                                                    <label class="selectgroup-item">
+                                                        <input id="radio1" type="radio" name="roles" value="admin"
+                                                        @if ($user->roles == 'admin') checked @endif>
+                                                        <label for="radio1">Admin</label>
+                                                    </label>
+                                                    <label class="selectgroup-item">
+                                                        <input id="radio2" type="radio" name="roles" value="staf" @if ($user->roles == 'staf') checked @endif>>
+                                                        <label for="radio2">Staf</label>
+                                                    </label>
+                                                    <label class="selectgroup-item">
+                                                        <input id="radio3" type="radio" name="roles" value="user" @if ($user->roles == 'user') checked @endif>>
+                                                        <label for="radio3">User</label>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            {{-- <div class="col-md-6"></div> --}}
+                                            <div class="col-md-12"><button class="btn btn-primary">Submit</button></div>
                                         </div>
                                     </div>
-                                    <input type="password"
-                                        class="form-control @error('password')
-                                is-invalid
-                            @enderror"
-                                        name="password">
-                                </div>
-                                @error('password')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Phone</label>
-                                <input type="number" class="form-control @error('phone')
-                                    is-invalid
-                                @enderror" name="phone" value="{{ $user->phone }}">
-                                @error('phone')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Roles</label>
-                                <div class="selectgroup w-100">
-                                    <label class="selectgroup-item">
-                                        <input type="radio" name="roles" value="admin" class="selectgroup-input"
-                                            @if ($user->roles == 'admin') checked @endif>
-                                        <span class="selectgroup-button">Admin</span>
-                                    </label>
-                                    <label class="selectgroup-item">
-                                        <input type="radio" name="roles" value="staf" class="selectgroup-input"
-                                            @if ($user->roles == 'staf') checked @endif>
-                                        <span class="selectgroup-button">Staf</span>
-                                    </label>
-                                    <label class="selectgroup-item">
-                                        <input type="radio" name="roles" value="user" class="selectgroup-input"
-                                            @if ($user->roles == 'user') checked @endif>
-                                        <span class="selectgroup-button">User</span>
-                                    </label>
-
-                                </div>
+                                </form>
                             </div>
                         </div>
-                        <div class="card-footer text-right">
-                            <button class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
-
-            </div>
-        </section>
-    </div>
+            </section>
+        </div>
+    </section>
 @endsection
 
 @push('scripts')
+    <!-- Select Plugin Js -->
+    <script src="{{ asset('plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="{{ asset('plugins/jquery-slimscroll/jquery.slimscroll.js') }}"></script>
+    <!-- Dropzone Plugin Js -->
+    <script src="{{ asset('plugins/dropzone/dropzone.js') }}"></script>
+
+    <!-- Input Mask Plugin Js -->
+    <script src="{{ asset('plugins/jquery-inputmask/jquery.inputmask.bundle.js') }}"></script>
 @endpush

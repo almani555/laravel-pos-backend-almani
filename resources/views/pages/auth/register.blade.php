@@ -8,49 +8,56 @@
 @endpush
 
 @section('main')
-    <div class="card card-primary">
-        <div class="card-header">
-            <h4>Register</h4>
-        </div>
-
-        <div class="card-body">
-            <form method="POST" action="{{ route('register') }}">
+    <div class="card">
+        <div class="body">
+            <form id="sign_up" method="POST" action="{{ route('register') }}">
                 @csrf
-                <div class="form-group">
-                    <label for="frist_name">Name</label>
-                    <input id="frist_name" type="text"
-                        class="form-control @error('name')
-                        is-invalid
-                    @enderror"
-                        name="name" autofocus>
+                <div class="msg">Register a new membership</div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">person</i>
+                    </span>
+                    <div class="form-line">
+                        <input type="text"
+                            class="form-control @error('name')
+                    is-invalid
+                @enderror"
+                            name="name" placeholder="Name Surname" autofocus>
+                    </div>
                     @error('name')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
-
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input id="email" type="email"
-                        class="form-control @error('email')
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">email</i>
+                    </span>
+                    <div class="form-line">
+                        <input type="email"
+                            class="form-control @error('email')
                         is-invalid
                     @enderror"
-                        name="email">
+                            name="email" placeholder="Your Email">
+                    </div>
                     @error('email')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
-
-                <div class="form-group">
-                    <label for="password" class="d-block">Password</label>
-                    <input id="password" type="password"
-                        class="form-control pwstrength @error('password')
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">lock</i>
+                    </span>
+                    <div class="form-line">
+                        <input type="password"
+                            class="form-control pwstrength @error('password')
                         is-invalid
                     @enderror"
-                        data-indicator="pwindicator" name="password">
+                            data-indicator="pwindicator" name="password" placeholder="Your Password">
+                    </div>
                     @error('password')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -61,24 +68,28 @@
                         <div class="label"></div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="password2" class="d-block">Password Confirmation</label>
-                    <input id="password2" type="password"
-                        class="form-control @error('password_confirmation')
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">lock</i>
+                    </span>
+                    <div class="form-line">
+                        <input type="password"
+                            class="form-control @error('password_confirmation')
                         is-invalid
                     @enderror"
-                        name="password_confirmation">
-                </div>
-                @error('password_confirmation')
-                    <div class="invalid-feedback">
-                        {{ $message }}
+                            name="password_confirmation" placeholder="Your Confirm Password">
                     </div>
-                @enderror
+                    @error('password_confirmation')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
 
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">
-                        Register
-                    </button>
+                <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">SIGN UP</button>
+
+                <div class="m-t-25 m-b--5 align-center">
+                    <a href="{{ route('login') }}">You already have a membership?</a>
                 </div>
             </form>
         </div>

@@ -1,6 +1,4 @@
- <div class="login-brand">
-     <img src="{{ asset('img/stisla-fill.svg') }}"
-         alt="logo"
-         width="100"
-         class="shadow-light rounded-circle">
- </div>
+<div class="logo">
+    <a href="javascript:void(0);">My<b>POS</b></a>
+    <small>Point of Sales</small>
+</div>
